@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#090c22">
+
+    <title>El día que nació una estrella</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <script defer src="js/config.js"></script>
+    <script defer src="js/app.js"></script>
+</head>
+
+<body>
+
+    <canvas id="world" aria-hidden="true"></canvas>
+    <canvas id="effects" aria-hidden="true"></canvas>
+    <div id="veil" aria-hidden="true"></div>
+
+    <header>
+        <button id="back" aria-label="Escena anterior" hidden>‹</button>
+
+        <div class="brand">
+            <span>✧</span>
+            EL DÍA QUE NACIÓ UNA ESTRELLA
+        </div>
+
+        <button id="sound" aria-label="Activar música" aria-pressed="false">
+            ♫
+        </button>
+
+        <button id="fullscreen" aria-label="Pantalla completa">
+            ⛶
+        </button>
+    </header>
+
+    <main id="stage">
+
+        <section id="portal" class="scene active" aria-label="El portal">
+
+            <div class="heading">
+
+                <div class="kicker">
+                    UNA AVENTURA DE CUMPLEAÑOS
+                </div>
+
+                <h1>
+                    Esta noche,<br>
+                    <em>el cielo es tuyo.</em>
+                </h1>
+
+                <p>Algo extraordinario está a punto de comenzar.</p>
+
+            </div>
+
+            <button id="door" class="door object" aria-label="Atravesar el portal">
+
+                <svg viewBox="0 0 320 420" aria-hidden="true">
+
+                    <defs>
+
+                        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+                            <stop stop-color="#fff5c4"/>
+                            <stop offset=".4" stop-color="#bb8051"/>
+                            <stop offset=".8" stop-color="#fbdca0"/>
+                            <stop offset="1" stop-color="#935642"/>
+                        </linearGradient>
+
+                        <radialGradient id="inside">
+                            <stop stop-color="#d8a3ff"/>
+                            <stop offset=".35" stop-color="#633b9c"/>
+                            <stop offset="1" stop-color="#110e3d"/>
+                        </radialGradient>
+
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="5"/>
+                        </filter>
+
+                        <pattern id="starsP" width="41" height="53" patternUnits="userSpaceOnUse">
+                            <circle cx="8" cy="10" r="1" fill="#fff7db"/>
+                            <circle cx="30" cy="37" r="1.5" fill="#f8b9ff"/>
+                        </pattern>
+
+                    </defs>
+
+                    <path
+                        d="M62 377V165a98 98 0 01196 0v212Z"
+                        fill="url(#inside)"
+                        stroke="#dfb2ff"
+                        stroke-width="14"
+                        filter="url(#glow)"
+                    />
+
+                    <path
+                        d="M62 377V165a98 98 0 01196 0v212Z"
+                        fill="url(#inside)"
+                        stroke="url(#gold)"
+                        stroke-width="8"
+                    />
+
+                    <path
+                        d="M77 377V165a83 83 0 01166 0v212Z"
+                        fill="url(#starsP)"
+                        stroke="#f8d9a2"
+                        stroke-opacity=".6"
+                        stroke-width="2"
+                    />
+
+                    <g fill="none" stroke="#efd1a0" stroke-opacity=".65">
+
+                        <path d="M160 65V377M78 230H242M77 310H243"/>
+
+                        <circle cx="160" cy="190" r="54"/>
+
+                        <path d="M160 136 200 190 160 244 120 190Z"/>
+
+                        <circle cx="160" cy="190" r="31"/>
+
+                    </g>
+
+                    <path
+                        d="M160 155 168 182 195 190 168 198 160 225 152 198 125 190 152 182Z"
+                        fill="#fff4b9"
+                        class="door-star"
+                    />
+
+                    <path
+                        d="M45 377H275M38 390H282M24 403H296"
+                        stroke="url(#gold)"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                    />
+
+                    <circle cx="175" cy="278" r="5" fill="#f9d89d"/>
+
+                </svg>
+
+            </button>
+
+            <div class="instruction">
+                <span class="pulse-dot"></span>
+                Toca el portal para entrar
+            </div>
+
+        </section>
+
+        <section id="giftScene" class="scene" hidden aria-label="El regalo">
+
+            <div class="heading">
+
+                <div class="kicker">
+                    PRIMERA SORPRESA
+                </div>
+
+                <h1>
+                    ¡Feliz cumpleaños,<br>
+                    <em data-name>Lucero</em>!
+                </h1>
+
+                <p>Hay un regalo que solo puedes abrir tú.</p>
+
+            </div>
+
+            <button id="gift" class="gift object" aria-label="Abrir regalo">
+
+                <div class="gift-aura"></div>
+
+                <div class="gift-box">
+
+                    <div class="box-front"></div>
+                    <div class="box-side"></div>
+
+                    <div class="ribbon-front"></div>
+                    <div class="ribbon-side"></div>
+
+                    <div class="lid">
+
+                        <div class="lid-top"></div>
+                        <div class="lid-front"></div>
+                        <div class="lid-side"></div>
+
+                        <div class="bow">
+                            <i></i>
+                            <i></i>
+                            <b></b>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <span class="gift-star">✦</span>
+
+            </button>
+
+            <div class="instruction" id="giftHint">
+
+                <span class="pulse-dot"></span>
+
+                Abre tu regalo que esperas
+
+            </div>
+
+        </section>
+
+        <section id="cakeScene" class="scene" hidden aria-label="El pastel">
+
+            <div class="heading">
+
+                <div class="kicker">
+                    UN NUEVO COMIENZO
+                </div>
+
+                <h1>
+                    Pide un<br>
+                    <em>deseo.</em>
+                </h1>
+
+                <p>Apaga las cinco velas.</p>
+
+            </div>
+
+            <div class="cake object">
+
+                <div id="candles" class="candles"></div>
+
+                <div class="cake-top"></div>
+
+                <div class="cake-tier tier1">
+                    <i></i>
+                </div>
+
+                <div class="cake-tier tier2">
+                    <i></i>
+                </div>
+
+                <div class="cake-tier tier3">
+                    <i></i>
+                </div>
+
+                <div class="cake-plate"></div>
+
+            </div>
+
+            <div class="instruction" id="cakeHint">
+                0 de 5 velas apagadas
+            </div>
+
+        </section>
+
+        <section id="memories" class="scene" hidden aria-label="Los recuerdos">
+
+            <div class="heading">
+
+                <div class="kicker">
+                    MOMENTOS QUE PERMANECEN
+                </div>
+
+                <h1>
+                    Un cielo de<br>
+                    <em>recuerdos.</em>
+                </h1>
+
+                <p>Toca cada fotografía flotante y descubre su mensaje.</p>
+
+            </div>
+
+            <div id="photos" class="photos object"></div>
+
+            <div class="instruction" id="photoHint">
+                0 de 4 recuerdos descubiertos
+            </div>
+
+            <div
+                id="memoryText"
+                class="memory-text"
+                aria-live="polite"
+                hidden>
+            </div>
+
+        </section>
+
+        <section id="garden" class="scene" hidden aria-label="El jardín">
+
+            <div class="heading">
+
+                <div class="kicker">
+                    SEMILLAS DE FUTURO
+                </div>
+
+                <h1>
+                    Que todo lo bueno<br>
+                    <em>florezca.</em>
+                </h1>
+
+                <p>Despierta las flores de este jardín.</p>
+
+            </div>
+
+            <div id="flowers" class="flowers"></div>
+
+            <div
+                id="gardenWish"
+                class="garden-wish"
+                aria-live="polite">
+            </div>
+
+            <div class="instruction" id="flowerHint">
+                0 de 5 flores despiertas
+            </div>
+
+        </section>
+
+        <section id="sky" class="scene" hidden aria-label="Los faroles">
+
+            <div class="heading">
+
+                <div class="kicker">
+                    DESEOS AL INFINITO
+                </div>
+
+                <h1>
+                    Que tus sueños<br>
+                    <em>lleguen lejos.</em>
+                </h1>
+
+                <p>
+                    Desliza cada farol hacia arriba o tócalo para liberarlo.
+                </p>
+
+            </div>
+
+            <div id="lanterns" class="lanterns"></div>
+
+            <div class="instruction" id="skyHint">
+                0 de 5 deseos liberados
+            </div>
+
+            <div id="skyName" class="sky-name" hidden>
+
+                ✧ <span data-name>Estrella</span> ✧
+
+            </div>
+
+        </section>
+
+        <section id="planetScene" class="scene" hidden aria-label="El planeta">
+
+            <div class="heading">
+
+                <div class="kicker">
+                UN MUNDO POR EXPLORAR
+                </div>
+
+                <h1>
+                    Tu propio<br>
+                    <em>universo.</em>
+                </h1>
+
+                <p>
+                    Gira el planeta con tu dedo y descubre sus tres estrellas.
+                </p>
+
+            </div>
+
+            <div class="planet-wrap object">
+
+                <canvas
+                    id="planet"
+                    aria-label="Planeta interactivo"
+                    tabindex="0">
+                </canvas>
+
+                <div id="planetStars"></div>
+
+            </div>
+
+            <div class="instruction" id="planetHint">
+                0 de 3 estrellas descubiertas
+            </div>
+
+            <div
+                id="planetWish"
+                class="garden-wish"
+                aria-live="polite">
+            </div>
+
+        </section>
+
+        <section id="letterScene" class="scene" hidden aria-label="La carta">
+
+            <div class="heading">
+
+                <div class="kicker">
+                    EL ÚLTIMO MENSAJE
+                </div>
+
+                <h1>
+                    Una carta<br>
+                    <em>entre estrellas.</em>
+                </h1>
+
+                <p>Hay palabras que merecen quedarse.</p>
+
+            </div>
+
+            <button id="envelope" class="envelope object" aria-label="Abrir carta">
+
+                <div class="env-paper">✦</div>
+
+                <div class="env-back"></div>
+                <div class="env-front"></div>
+                <div class="env-flap"></div>
+
+                <div class="seal">✷</div>
+
+            </button>
+
+            <div id="letter" class="letter" hidden>
+
+                <span class="kicker">
+                    PARA <span data-name>Estrella</span>
+                </span>
+
+                <h2>¡Feliz cumpleaños!</h2>
+
+                <div id="letterBody"></div>
+
+                <button id="finish">
+                    Encender el cielo <span>✧</span>
+                </button>
+
+            </div>
+
+            <div class="instruction" id="letterHint">
+
+                <span class="pulse-dot"></span>
+
+                Toca el sello para leer
+
+            </div>
+
+        </section>
+
+        <section id="finale" class="scene" hidden aria-label="Celebración final">
+
+            <div class="final-title">
+
+                <div class="kicker">
+                    EL UNIVERSO CELEBRA CONTIGO
+                </div>
+
+                <div class="final-star">✦</div>
+
+                <h1>
+                    Feliz<br>
+                    cumpleaños,<br>
+                    <em data-name>Estrella</em>.
+                </h1>
+
+                <p>
+                    Que este nuevo año esté lleno de historias maravillosas.
+                </p>
+
+                <button id="restart">
+                    ↻ &nbsp; Volver a vivir la aventura
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <span id="chapter">00 / 08</span>
+
+        <div id="progress" aria-label="Progreso"></div>
+
+        <span>DESLIZA · TOCA · DESCUBRE</span>
+
+    </footer>
+
+    <div id="announcement" class="sr-only" aria-live="polite"></div>
+
+</body>
+</html>
